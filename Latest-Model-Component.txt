@@ -1,0 +1,262 @@
+const Base = require('../../../support/_base.page.js');
+const Timer = require('../../../support/waits.js');
+
+const teamcityTopHeader = function teamcityTopHeader() {
+  // ---------------------------------------------------------------------------------------------
+  // Page elements
+  // ---------------------------------------------------------------------------------------------
+  const base = new Base();
+  const timer = new Timer();
+
+  const locatorUserMenu = "//div[@class='info']//span[@class='icon icon16 toggle']";
+  const elemUserMenu = element(by.xpath(locatorUserMenu));
+
+  const locatorProjectMenu = "//div[@class='icon icon16 icon_popup']";
+  const elemProjectMenu = element(by.xpath(locatorProjectMenu));
+
+  /*const locatorProjectSubMenu = "//a[@href='https://teamcity01pp-iil.devtools.intel.com/project.html?projectId=AutomationTest']";
+  const elemProjectSubMenu = element(by.xpath(locatorProjectSubMenu));
+  
+  const locatorProjectOwnerPage = "//a[contains(@title,'Test_Ade')]";
+  const elemProjectOwnerPage = element(by.xpath(locatorProjectOwnerPage));*/
+
+  const locatorCustomBuildBtn = "//div[@id='bt412-div']//button[contains(@title,'Run custom build')]";
+  const elemCustomBuildBtn = element(by.xpath(locatorCustomBuildBtn));
+
+  const locatorAgentDropdownBtn = "//button[@class='-ufd-teamcity-ui-agentId']";
+  const elemAgentDropdownBtn = element(by.xpath(locatorAgentDropdownBtn));
+
+  const locatorAgentOption = "//li[@data-title='ade_test']";
+  const elemAgentOption = element(by.xpath(locatorAgentOption));  
+
+  const locatorRunBuildBtn = "//input[@value='Run Build']";
+  const elemRunBuildBtn = element(by.xpath(locatorRunBuildBtn)); 
+
+  const locatorLogOutBtn = "//a[contains(@class,'logout')]";
+  const elemLogOutBtn = element(by.xpath(locatorLogOutBtn));
+
+  const locatorBuildNumber = "(//div[@id='tabsContainer']/ul/li)[4]//span";
+ 
+  const locatorAdminAnchor = "//a[@href='/admin/admin.html']";
+  const elemAdminAnchor = element(by.xpath(locatorAdminAnchor));
+
+  const locatorLicensesMenu = "//a[@href='/admin/admin.html?item=license&init=1']";
+  const elemLicensesMenu = element(by.xpath(locatorLicensesMenu));
+  
+  // ---------------------------------------------------------------------------------------------
+  // Page Actions
+  // ---------------------------------------------------------------------------------------------
+
+  this.clickUserMenu = async () => {
+    try {
+      await base.waitForElementVisible(elemUserMenu);
+      await elemUserMenu.click();
+      await browser.waitForAngular();
+      await base.browserSleep(timer.getMySmallWait());
+    }
+    catch (e) {
+      return false;
+    }
+    return true;
+  };
+
+  this.topAnchorIsPresent = async (version) => {
+
+    const elemBuildNumber = element(by.xpath(
+      locatorBuildNumber.replace('XXXX', version)));
+
+    await browser.waitForAngular();
+    return elemBuildNumber.isPresent();
+  };
+
+  this.clickProjectMenu = async () => {
+    try {
+      await base.waitForElementVisible(elemProjectMenu);
+      await elemProjectMenu.click();
+      await browser.waitForAngular();
+      await base.browserSleep(timer.getMySmallWait());
+    }
+    catch (e) {
+      return false;
+    }
+    return true;
+  };
+
+  this.clickProjectSubMenu = async () => {
+    try {
+      await base.waitForElementVisible(elemProjectSubMenu);
+      await elemProjectSubMenu.click();
+      await browser.waitForAngular();
+      await base.browserSleep(timer.getMySmallWait());
+    }
+    catch (e) {
+      return false;
+    }
+    return true;
+  };
+
+  this.clickProjectOwnerPage = async () => {
+    try {
+      await base.waitForElementVisible(elemProjectOwnerPage);
+      await elemProjectOwnerPage.click();
+      await browser.waitForAngular();
+      await base.browserSleep(timer.getMySmallWait());
+    }
+    catch (e) {
+      return false;
+    }
+    return true;
+  };
+
+  this.clickCustomBuildBtn = async () => {
+    try {
+      await base.waitForElementVisible(elemCustomBuildBtn);
+      await elemCustomBuildBtn.click();
+      await browser.waitForAngular();
+      await base.browserSleep(timer.getMySmallWait());
+    }
+    catch (e) {
+      return false;
+    }
+    return true;
+  };
+
+  this.clickAgentDropdownBtn = async () => {
+    try {
+      await base.waitForElementVisible(elemAgentDropdownBtn);
+      await elemAgentDropdownBtn.click();
+      await browser.waitForAngular();
+      await base.browserSleep(timer.getMySmallWait());
+    }
+    catch (e) {
+      return false;
+    }
+    return true;
+  };
+  
+  this.clickAgentOption = async () => {
+    try {
+      await base.waitForElementVisible(elemAgentOption);
+      await elemAgentOption.click();
+      await browser.waitForAngular();
+      await base.browserSleep(timer.getMySmallWait());
+    }
+    catch (e) {
+      return false;
+    }
+    return true;
+  };
+
+  this.clickRunBuildBtn = async () => {
+    try {
+      await base.waitForElementVisible(elemRunBuildBtn);
+      await elemRunBuildBtn.click();
+      await browser.waitForAngular();
+      await base.browserSleep(timer.getMySmallWait());
+    }
+    catch (e) {
+      return false;
+    }
+    return true;
+  };
+
+  /*this.clickBuildQueueAnchor = async () => {
+    try {
+      await base.waitForElementVisible(elemBuildQueueAnchor);
+      await elemBuildQueueAnchor.click();
+      await browser.waitForAngular();
+      await base.browserSleep(timer.getMySmallWait());
+    }
+    catch (e) {
+      return false;
+    }
+    return true;
+  };*/
+
+
+  this.clickAdminAnchor = async () => {
+    try {
+      await base.waitForElementVisible(elemAdminAnchor);
+      await elemAdminAnchor.click();
+      await browser.waitForAngular();
+      await base.browserSleep(timer.getMySmallWait());
+    }
+    catch (e) {
+      return false;
+    }
+    return true;
+  };
+
+  this.clickLicensesMenu = async () => {
+    try {
+      await base.waitForElementVisible(elemLicensesMenu);
+      await elemLicensesMenu.click();
+      await browser.waitForAngular();
+      await base.browserSleep(timer.getMySmallWait());
+    }
+    catch (e) {
+      return false;
+    }
+    return true;
+  };
+  /*
+
+  this.clickUserMenuItem = async (menuItem) => {
+    const elemMenuTabLink = element(by.xpath(
+      locatorUserMenuItem.replace('XXXX', menuItem)));
+    try {
+      await base.waitForElementVisible(elemMenuTabLink);
+      await elemMenuTabLink.click();
+      await browser.waitForAngular();
+      await base.browserSleep(timer.getMyMedWait());
+    }
+    catch (e) {
+      return false;
+    }
+    return true;
+  };
+  */
+  this.clickLogOut = async () => {
+    try {
+      await elemLogOutBtn.click();
+      await base.browserSleep(timer.getMyMedWait());
+      await browser.waitForAngular();
+    }
+    catch (e) {
+      return false;
+    }
+    return true;
+  };
+
+  /*
+  this.clickUserMenu = async () => {
+    try {
+      await base.waitForElementVisible(elemUserMenu);
+      await elemUserMenu.click();
+      await browser.waitForAngular();
+      await base.browserSleep(timer.getMySmallWait());
+    }
+    catch (e) {
+      return false;
+    }
+    return true;
+  };
+
+/*
+  this.clickGroupsMenu = async () => {
+    try {
+      await base.waitForElementVisible(elemGroupsMenu);
+      await elemGroupsMenu.click();
+      await browser.waitForAngular();
+      await base.browserSleep(timer.getMySmallWait());
+    }
+    catch (e) {
+      return false;
+    }
+    return true;
+  };
+  */
+};
+
+module.exports = teamcityTopHeader; 
+

@@ -1,0 +1,109 @@
+const Base = require('../../../support/_base.page.js');
+const Timer = require('../../../support/waits.js');
+
+const teamcityLogIn = function teamcityLogIn() {
+  // ---------------------------------------------------------------------------------------------
+  // Page elements
+  // ---------------------------------------------------------------------------------------------
+  const base = new Base();
+  const timer = new Timer();
+  const locatorUserNameInput = "//input[@id='username']";
+  const elemUserNameInput = element(by.xpath(locatorUserNameInput));
+
+  const locatorPasswordInput = "//input[@id='password']";
+  const elemPasswordInput = element(by.xpath(locatorPasswordInput));
+
+  const locatorLogInBtn = "//input[@class='btn loginButton']";
+  const elemLogInBtn = element(by.xpath(locatorLogInBtn));
+  // ---------------------------------------------------------------------------------------------
+  // Page Actions
+  // ---------------------------------------------------------------------------------------------
+
+  this.NavigateToLoginPage = async (hostName, appAngular) => {
+    try {
+      await base.getApp(hostName.concat('/login.html'), appAngular);      
+      await browser.waitForAngular();
+      await base.browserSleep(timer.getMyMedWait());
+      return true;
+    }
+    catch (e) {
+      return false;
+    }
+  };
+
+  this.NavigateToAutomationTestPage = async (hostName, appAngular) => {
+    try {
+      await base.getApp(hostName.concat('/project.html?projectId=AutomationTest'), appAngular);      
+      await browser.waitForAngular();
+      await base.browserSleep(timer.getMyMedWait());
+      return true;
+    }
+    catch (e) {
+      return false;
+    }
+  };
+
+  this.NavigateToUserProjectPage = async (hostName, appAngular) => {
+    try {
+      await base.getApp(hostName.concat('/project.html?projectId=AutomationTest_TestAde&tab=projectOverview'), appAngular);      
+      await browser.waitForAngular();
+      await base.browserSleep(timer.getMyMedWait());
+      return true;
+    }
+    catch (e) {
+      return false;
+    }
+  };
+  
+  /*
+  this.AutoLogin = async (hostName, appAngular) => {
+    try {
+      await base.getApp(hostName, appAngular);      
+      await browser.waitForAngular();
+      await base.browserSleep(timer.getMyMedWait());
+      return true;
+    }
+    catch (e) {
+      return false;
+    }
+  };
+  */ 
+  
+  this.enterUserName = async (user) => {
+    try {
+      await base.waitForElementVisible(elemUserNameInput);
+      await elemUserNameInput.sendKeys(user);
+    }
+    catch (e) {
+      return false;
+    }
+    return true;
+  };
+
+  this.enterPassword = async (pasword) => {
+    base.browserSleep(timer.getMySmallWait());
+    try {      
+      await elemPasswordInput.sendKeys(pasword);
+    }
+    catch (e) {
+      return false;
+    }
+    return true;
+  };
+
+  this.clickLogin = async () => {
+    base.browserSleep(timer.getMySmallWait());
+    try {
+      await elemLogInBtn.click();
+      await browser.waitForAngular();
+      await base.browserSleep(timer.getMyBigWait());
+    }
+    catch (e) {
+      return false;
+    }
+    return true;
+  };
+
+};
+
+module.exports = teamcityLogIn;

@@ -1,0 +1,122 @@
+require('jasmine-collection-matchers');
+require('jasmine-intc-matchers');
+
+const fs = require('fs');
+
+const Local = (fs.existsSync('./src/support/local.js')) ? require('../../support/local.js') : require('../../support/local-sample.js'); // eslint-disable-line import/no-unresolved
+const Waits = require('../../support/waits.js');
+const BasePage = require('../../support/_base.page.js');
+const TeamcityLoginPage = require('../model/pages/teamcity_login_page.js');
+const TeamcityTopHeader = require('../model/components/teamcity_top_header.js');
+
+const local = new Local();
+const waits = new Waits();
+const base = new BasePage();
+const teamcityLoginPage = new TeamcityLoginPage();
+const teamcityTopHeader = new TeamcityTopHeader();
+
+const myWaitForRallySync = waits.getMyWaitForRallySync();
+
+const teamcityHostName = (process.env.teamcityHostName != null) ? process.env.teamcityHostName : local.teamcityHostName();
+const teamcityUserName = (process.env.teamcityUserName != null) ? process.env.teamcityUserName : local.teamcityUserName();
+const teamcityPassword = (process.env.teamcityPassword != null) ? process.env.teamcityPassword : local.teamcityPassword();
+
+const appAngular = false;
+
+const using = require('jasmine-data-provider');
+const randomSufix =  Math.random().toString(36).substring(2, 10);
+// const randomSufix = '1ragbat2';
+const DataProvider = require('../../Teamcity/data/teamcitydata.js');
+
+describe(`Teamcity Health Check on: '${teamcityHostName}'`, () => {
+  base.getApp(teamcityHostName, appAngular);
+  
+  /*describe('Teamcity - Login and Logout', () => {
+    using(DataProvider.LatestVersion.PageTitles, (data) => {
+      it('Navigate to Login Page', () => {
+        expect(teamcityLoginPage.NavigateToLoginPage(teamcityHostName, appAngular)).toBe(true);      
+      });
+      it('Introduce User Name', () => {
+        expect(teamcityLoginPage.enterUserName(teamcityUserName)).toBe(true);
+      });
+      it('Introduce Password', () => {
+        expect(teamcityLoginPage.enterPassword(teamcityPassword)).toBe(true);
+      });
+      it('Click on Login Button', () => {
+        expect(teamcityLoginPage.clickLogin()).toBe(true);
+      });
+      it('Confirm user was able to login by verifying the page title', () => {        
+        expect(base.getPageTitle()).toEqual(data.ProjectsPageTitle);
+      });
+      it('Click on User Menu', () => {
+        expect(teamcityTopHeader.clickUserMenu()).toBe(true);
+      });
+      it('Click on Log Out Button', () => {
+        expect(teamcityTopHeader.clickLogOut('Log out')).toBe(true);
+      });    
+      it('Verify Logout Page is Displayed', () => {
+        expect(base.getPageTitle()).toEqual(data.LoginPageTitle);
+      });
+    });
+  });*/
+
+  describe('Teamcity - Login and Run Build Queue', () => {
+    using(DataProvider.LatestVersion.PageTitles, (data) => {
+      it('Navigate to Login Page', () => {
+        expect(teamcityLoginPage.NavigateToLoginPage(teamcityHostName, appAngular)).toBe(true);      
+      });
+      it('Introduce User Name', () => {
+        expect(teamcityLoginPage.enterUserName(teamcityUserName)).toBe(true);
+      });
+      it('Introduce Password', () => {
+        expect(teamcityLoginPage.enterPassword(teamcityPassword)).toBe(true);
+      });
+      it('Click on Login Button', () => {
+        expect(teamcityLoginPage.clickLogin()).toBe(true);
+      });
+      it('Confirm user was able to login by verifying the page title', () => {        
+        expect(base.getPageTitle()).toEqual(data.ProjectsPageTitle);
+      });
+      it('Check the number of builds right next to the "Build Queue" anchor', () => {
+        expect(teamcityTopHeader.topAnchorIsPresent()).toBe(true);
+        });
+      it('Click on Project Menu', () => {
+        expect(teamcityTopHeader.clickProjectMenu()).toBe(true);
+        });
+      it('Navigate to Automation Test Page', () => {
+        expect(teamcityLoginPage.NavigateToAutomationTestPage(teamcityHostName, appAngular)).toBe(true);      
+        });
+      it('Navigate to User Project Page', () => {
+          expect(teamcityLoginPage.NavigateToUserProjectPage(teamcityHostName, appAngular)).toBe(true);      
+        });
+      it('Clicks on Run Custom Build Button', () => {
+        expect(teamcityTopHeader.clickCustomBuildBtn()).toBe(true);
+        });
+      it('Clicks on Agent Build Button', () => {
+          expect(teamcityTopHeader.clickAgentDropdownBtn()).toBe(true);
+          });
+      it('Clicks on Agent Build Option', () => {
+          expect(teamcityTopHeader.clickAgentOption()).toBe(true);
+          });
+      it('Clicks on Run Build Button', () => {
+          expect(teamcityTopHeader.clickRunBuildBtn()).toBe(true);
+          });
+      it('Click on User Menu', () => {
+        expect(teamcityTopHeader.clickUserMenu()).toBe(true);
+      });
+      it('Click on Log Out Button', () => {
+        expect(teamcityTopHeader.clickLogOut('Log out')).toBe(true);
+      });    
+      it('Verify Logout Page is Displayed', () => {
+        expect(base.getPageTitle()).toEqual(data.LoginPageTitle);
+      });
+    });
+  });
+
+  describe('Delay for Rally', () => {
+    it(`Wait for ${myWaitForRallySync}msec`, () => {
+      expect(base.browserSleep(myWaitForRallySync)).toBe(true);
+    });
+  });
+});
+  

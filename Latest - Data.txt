@@ -1,0 +1,22 @@
+'use-strict';
+
+module.exports = {
+  LatestVersion: {
+
+    PageTitles: {
+      dataSet1: {
+        LoginPageTitle: 'Log in to TeamCity — TeamCity',
+        ProjectsPageTitle: 'Projects — TeamCity',
+        LicensesPageTitle: 'Licenses — TeamCity',
+        BuildQueuePageTitle: 'Build Queue — TeamCity',
+      },
+    },
+
+    ProjectCreation: {
+      dataSet1: {
+        ProjecNametPrefix: 'AT-',
+      },
+    },
+    
+  },
+};
