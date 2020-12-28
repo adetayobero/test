@@ -1,0 +1,50 @@
+'use-strict';
+ 
+const local = function local() {
+ 
+  // ---------------------------------------------------------------------------------------------
+  // SPECIFY YOUR RALLY SYNC
+  // ---------------------------------------------------------------------------------------------
+  this.rallySync = () => false;
+  this.rallyKey = () => 'introduce_a_value';
+  this.testSetId = () => 'introduce_a_value';
+  this.projectId = () => 'introduce_a_value';
+  this.executionNotes = () => 'introduce_a_value';
+ 
+  // ---------------------------------------------------------------------------------------------
+  // SPECIFY YOUR SELENIUM SERVER URL:
+  // ---------------------------------------------------------------------------------------------
+  this.seleniumServer = () => 'http://127.0.0.1:4444/wd/hub';
+ 
+  // ---------------------------------------------------------------------------------------------
+  // SPECIFY YOUR Sleep Multiplier
+  // ---------------------------------------------------------------------------------------------
+  this.sleepsMultiplier = () => 1;
+ 
+  // ---------------------------------------------------------------------------------------------
+  // SPECIFY SPEC(S) TO RUN:
+  // ---------------------------------------------------------------------------------------------
+  // use "," to separate multiple spcecs in the string
+  this.specToRun = () => './Teamcity/specs/teamcity_LatestVersion_HealthCheck.js';
+ 
+  // ---------------------------------------------------------------------------------------------
+  // Teamcity Application Variables
+  // ---------------------------------------------------------------------------------------------
+  this.teamcityHostName = () => 'https://teamcity01pp-iil.devtools.intel.com';
+  this.teamcityUserName = () => 'amr\\sys_auto_tc';
+  this.teamcityPassword = () => '%D!JcrpGE3XzHTfXs5mf';
+ 
+//---------------------------------------------------------------------------------------------
+// AF
+// ---------------------------------------------------------------------------------------------
+ 
+this.afHostName = () => 'ubit-artifactory-uat-app02.devtools.intel.com';
+this.afHostNameNode01 = () => 'ubit-artifactory-uat-app01.devtools.intel.com';
+this.afHostNameNode02 = () => 'ubit-artifactory-uat-app02.devtools.intel.com';
+this.afFilePath = () => '/workspaces/protractor-automation-framework/src/';
+this.tcHostName = () => 'ubit-teamcity-dev.intel.com';
+this.afUserName = () => 'sys_qatest';
+this.afPassword = () => 'AutomationTestingIsGreat1!';
+};
+ 
+module.exports = local;
